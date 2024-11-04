@@ -19,6 +19,7 @@ managed-csi               disk.csi.azure.com         Delete          WaitForFirs
 Define 2 variables 
 ```
 STORAGE_CLASS=azuredisk-legacy
+SIZE="1Gi"
 IMAGE=docker.io/busybox:latest
 ```
 
@@ -45,7 +46,7 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: $SIZE
   storageClassName: $STORAGE_CLASS
 ---
 # Create a deployment in the namespace basic-app with the name basic-app-deployment using this pvc and writing every 10 seconds the date in the file /data/date.txt
