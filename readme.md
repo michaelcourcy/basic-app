@@ -125,6 +125,26 @@ Tue Oct  1 14:14:38 UTC 2024
 Tue Oct  1 14:14:48 UTC 2024
 ```
 
+# Filled up the volumes to measure the snapshot and export time
+
+```
+oc exec -n basic-app -it deploy/basic-app-deployment -- sh
+cd /data
+for i in $(seq 1 10); do
+  dd if=/dev/urandom of=file$i bs=1M count=90
+done
+```
+
+Check your /data is full now 
+```
+df -h | grep /data
+```
+
+You should see something like that 
+```
+/dev/sdb                973.4M    957.4M         0 100% /data
+```
+
 # Test backup 
 
 If you have created the necessary infra profile or annotated the volumesnapshotclass you can create a policy on basic-app namespace and run it.
